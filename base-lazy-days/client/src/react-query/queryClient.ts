@@ -24,6 +24,7 @@ export const queryClient = new QueryClient({
       // Suppress refetching for data that does not change often
       staleTime: 1000 * 60 * 10, // 10 mins in ms
       gcTime: 1000 * 60 * 15, // 15 mins in ms
+      refetchOnWindowFocus: false,
     },
   },
   queryCache: new QueryCache({
