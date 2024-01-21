@@ -20,9 +20,9 @@ export function useStaff() {
 
   // select function to filter treatments by staff treatments
   const selectFn = useCallback(
-    (data: Staff[]) => {
-      if (filter === "all") return data;
-      return filterByTreatment(data, filter);
+    (unfilteredSatff: Staff[]) => {
+      if (filter === "all") return unfilteredSatff;
+      return filterByTreatment(unfilteredSatff, filter);
     },
     [filter]
   );
@@ -34,6 +34,13 @@ export function useStaff() {
     queryKey: [queryKeys.staff],
     queryFn: getStaff,
     select: (data) => selectFn(data),
+
+    // Suppress refetching for data that does not change often
+    staleTime: 1000 * 60 * 10, // 10 mins in ms
+    gcTime: 1000 * 60 * 15, // 15 mins in ms
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
 
   return { staff: data, filter, setFilter };
