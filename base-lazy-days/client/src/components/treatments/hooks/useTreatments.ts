@@ -20,8 +20,6 @@ export function useTreatments(): Treatment[] {
     queryFn: getTreatments,
 
     // Suppress refetching for data that does not change often
-    staleTime: 1000 * 60 * 10, // 10 mins in ms
-    gcTime: 1000 * 60 * 15, // 15 mins in ms
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
