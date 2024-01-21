@@ -18,11 +18,6 @@ export function useTreatments(): Treatment[] {
   const { data = fallback } = useQuery({
     queryKey: [queryKeys.treatments],
     queryFn: getTreatments,
-
-    // Suppress refetching for data that does not change often
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
   });
 
   return data || [];
