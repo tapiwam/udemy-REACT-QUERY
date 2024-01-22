@@ -225,8 +225,31 @@ function readCsvFile(
   return resp;
 }
 
+function modelToCsv(model: CSVData): string {
+  const lines: string[] = [];
+
+  if (model.hasErrors) {
+    console.error("Model has errors", model.errors);
+    return "";
+  }
+
+  // Iterate through headers and get lines
+  model.headers.headerLines.forEach((headerLine) => {
+    lines.push(headerLine);
+  });
+
+  // Iterate through records and get lines
+  model.records.forEach((record) => {
+    lines.push(record.map((record) => record.formattedValue).join(","));
+  });
+
+  return lines.join("\n");
+}
+
 // readHeaders(2, sample2);
 
-readCsvFile(1, sample1);
+// const a = readCsvFile(1, sample1);
+// console.log(modelToCsv(a));
 
-// readCsvFile(2, sample2);
+const b = readCsvFile(2, sample2);
+console.log(modelToCsv(b));
