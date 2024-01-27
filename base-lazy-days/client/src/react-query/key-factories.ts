@@ -1,7 +1,8 @@
 import { queryKeys } from "./constants";
 
 export const generateUserKey = (userId: number, userToken: string) => {
-  return [queryKeys.user, userId, userToken];
+  // Deliberate remove from user key to avoid stale data caching
+  return [queryKeys.user, userId];
 };
 
 export const generateUserAppointmentsKey = (
